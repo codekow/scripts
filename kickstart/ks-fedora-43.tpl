@@ -22,11 +22,13 @@ keyboard --vckeymap=us --xlayouts='us'
 lang en_US.UTF-8
 
 # SSH user - install only
+sshpw --username=root      --plaintext alongpassword
 sshpw --username=install      --plaintext alongpassword
 sshpw --username=install-user --plaintext alongpassword
 
 # Root user
-# rootpw --iscrypted $2b$10$dbEmfMvW0P7k06Q1VsmA2OeLw7FuhzgxIe4vP2hDmUHd9f2uNGDiu
+# openssl passwd -6
+# rootpw --iscrypted $6$Bk0u6peFc7ZfbG3D$3mxmnys1UMWzKDH733mmg/SWNKjkzRx3NUPkt.iOj7PaBMF9L4nzjfHZeukrwZgW5T4u0UBLoNyMyMiOm1lF7.
 rootpw --lock
 
 # Regular user
@@ -89,7 +91,7 @@ btrfs /home --subvol --name=home fedora
 
 %pre --log=/root/ks-pre.log
 
-# grep *.cfg
+# grep %include *.cfg
 > /tmp/inst.users
 > /tmp/inst.network
 > /tmp/inst.repos
@@ -103,13 +105,9 @@ btrfs /home --subvol --name=home fedora
 %end
 
 %post --nochroot
+
   cp /root/ks-pre.log /mnt/sysroot/root
   cp /root/debug-pkgs.log /mnt/sysroot/root
-
-  # hostnamectl set-hostname server.example.com
-  # hostnamectl --pretty set-hostname server.example.com
-  # cp /etc/hostname /mnt/sysimage/etc/hostname
-  # cp /etc/machine-info /mnt/sysimage/etc/machine-info
 
 %end
 
