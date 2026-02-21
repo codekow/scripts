@@ -1,20 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2034
 
-gpg_usage(){
-
-  echo "
-  gpg --export < name / id > -a > pub.asc
-  gpg_backup pub.asc $HOME
-
-  gpg --decrypt backup-*tgz.gpg | tar vzx
-  "
-}
-
-gpg_check(){
-  which gpg > /dev/null || { echo "[error] Install gpg"; return; }
-}
-
 gpg_backup(){
   GPG_IMPORT=${1}
   SOURCE=${2:-${HOME}}
@@ -39,5 +25,23 @@ gpg_backup(){
   unset GNUPGHOME
 }
 
-gpg_check
-gpg_usage
+gpg_check(){
+  which gpg > /dev/null || { echo "[error] Install gpg"; return; }
+}
+
+gpg_usage(){
+
+  echo "
+  gpg --export < name / id > -a > pub.asc
+  gpg_backup pub.asc $HOME
+
+  gpg --decrypt backup-*tgz.gpg | tar vzx
+  "
+}
+
+main(){
+  gpg_check
+  gpg_usage
+}
+
+main
