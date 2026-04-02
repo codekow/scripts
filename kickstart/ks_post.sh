@@ -199,7 +199,7 @@ Slice = vbmcd.slice
 Restart = on-failure
 RestartSec = 2
 TimeoutSec = 120
-ExecReload = /bin/kill -HUP $MAINPID
+ExecReload = /bin/kill -HUP \$MAINPID
 
 [Install]
 WantedBy = multi-user.target
@@ -264,6 +264,7 @@ After = syslog.target
 After = network.target
 
 [Service]
+LimitNOFILE=65535
 Type = simple
 User = ansible
 Group = libvirt
@@ -285,7 +286,7 @@ Slice = sushy.slice
 Restart = on-failure
 RestartSec = 2
 TimeoutSec = 120
-ExecReload = /bin/kill -HUP $MAINPID
+ExecReload = /bin/kill -HUP \$MAINPID
 
 [Install]
 WantedBy = multi-user.target
