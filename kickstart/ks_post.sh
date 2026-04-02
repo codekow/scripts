@@ -37,7 +37,8 @@ luks_remove_known_key(){
 
 clevis_setup_root(){
   if [ -d "/sys/firmware/efi" ]; then
-    systemd-analyze pcrs > /root/pcrs-ks
+    echo '# systemd-analyze pcrs' > /root/pcrs-ks
+    systemd-analyze pcrs >> /root/pcrs-ks
 
     # echo "${LUKS_DEFAULT}" | clevis luks bind -y -k - -d "${LUKS_PART}" tpm2 '{"pcr_ids":"0"}' || return
     cat "${LUKS_KEY_FILE}" | clevis luks bind -y -k - -d "${LUKS_PART}" tpm2 '{"pcr_ids":"0"}' || return

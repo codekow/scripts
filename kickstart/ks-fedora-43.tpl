@@ -22,8 +22,9 @@ keyboard --vckeymap=us --xlayouts='us'
 lang en_US.UTF-8
 
 # SSH user - install only
-sshpw --username=root         --plaintext alongpassword
-sshpw --username=install      --plaintext alongpassword
+sshpw --username root         --plaintext alongpassword
+sshpw --username install      --plaintext alongpassword
+sshpw --username install-user --plaintext alongpassword --lock
 
 # Root user
 # openssl passwd -6
@@ -71,10 +72,10 @@ bootloader --location=mbr --append=""
 # autopart --type=btrfs --encrypted --passphrase=alongpassword
 %include /tmp/inst.part
 
-part /boot --fstype="ext4" --size=1024
+part /boot    --fstype="ext4"  --size=1024
 part btrfs.00 --fstype="btrfs" --size=10240 --maxsize=102400 --grow --encrypted --passphrase=alongpassword
 
-btrfs none --data=single --label=fedora btrfs.00
+btrfs none  --data=single --label=fedora btrfs.00
 btrfs /     --subvol --name=root fedora
 btrfs /home --subvol --name=home fedora
 
