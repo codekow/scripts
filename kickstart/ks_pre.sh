@@ -87,7 +87,7 @@ check_disks(){
 }
 
 set_repos(){
-  OS_VER=${OS_VER:-43}
+  OS_VER=${OS_VER:-44}
   
   # REPO_BASE=http://mirrors.kernel.org/fedora
   REPO_BASE=http://mirror.pilotfiber.com/fedora/linux

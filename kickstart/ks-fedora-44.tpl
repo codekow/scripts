@@ -1,4 +1,4 @@
-# version=F43
+# version=F44
 # see https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html#chapter-2-kickstart-commands-in-fedora
 
 # ksvalidator kickstart.ks
@@ -37,7 +37,7 @@ rootpw --lock
 %include /tmp/inst.network
 
 # Use network installation
-# url --url="http://mirrors.kernel.org/fedora/releases/43/Server/x86_64/os"
+# url --url="http://mirrors.kernel.org/fedora/releases/44/Server/x86_64/os"
 # repo --name=updates
 # repo --name=fedora
 
