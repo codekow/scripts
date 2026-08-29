@@ -1,0 +1,31 @@
+[Container]
+Image=docker.io/rclone/rclone:latest
+
+AutoUpdate=registry
+ContainerName=rclone-bisync
+
+Exec=bisync "gdrive:/" "/data/remote" \
+--log-level ERROR \
+--log-file /root/.cache/rclone/rclone.log \
+--create-empty-src-dirs \
+--compare size,modtime,checksum \
+--fix-case \
+--check-access \
+--drive-acknowledge-abuse \
+--progress \
+--metadata \
+--resilient \
+--max-lock 2m \
+--recover
+
+SecurityLabelDisable=true
+Volume=%h/.config/rclone:/config/rclone
+Volume=%h/.cache/rclone:/root/.cache/rclone
+Volume=%h/Remotes/Google Drive/:/data/remote
+
+[Service]
+TimeoutStartSec=900
+Restart=always
+
+[Install]
+WantedBy=default.target
