@@ -19,6 +19,7 @@ rclone_bisync(){
   --create-empty-src-dirs \
   --check-filename .nobackup \
   --compare size,modtime,checksum \
+  --max-delete "50" \
   --fix-case \
   --check-access \
   --drive-acknowledge-abuse \
