@@ -36,6 +36,7 @@ rclone_bisync(){
     --max-delete "50" \
       $@
 
+  cat ${HOME}/.cache/rclone/rclone.log
   find "${LOCAL_SYNC}" -name "*.conflict*"
 }
 
