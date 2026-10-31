@@ -3,6 +3,7 @@ Image=docker.io/rclone/rclone:latest
 
 AutoUpdate=registry
 ContainerName=rclone-bisync
+Pull=missing
 
 Exec=bisync "gdrive:/" "/data/remote" \
       --log-level ERROR \
@@ -18,7 +19,7 @@ Exec=bisync "gdrive:/" "/data/remote" \
       --max-lock 2m \
       --recover \
       --check-filename .nobackup \
-      --max-delete "50"
+      --max-delete 50
 
 SecurityLabelDisable=true
 Volume=%h/.config/rclone:/config/rclone
@@ -26,8 +27,8 @@ Volume=%h/.cache/rclone:/root/.cache/rclone
 Volume=%h/Remotes/Google Drive/:/data/remote
 
 [Service]
-TimeoutStartSec=900
-Restart=always
+Type=oneshot
+# RemainAfterExit=yes
 
 [Install]
 WantedBy=default.target
